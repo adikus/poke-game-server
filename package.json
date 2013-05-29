@@ -1,0 +1,10 @@
+{
+    "name": "PokemonGameTest"
+  , "version": "0.0.1"
+  , "private": false 
+  , "dependencies": {
+    "underscore": ">0"
+    , "websocket": ">0"
+    , "mongoose": ">0"
+  }
+}
