@@ -105,7 +105,7 @@ module.exports = WsServer = cls.Class.extend({
         subdomain = request.headers.host.split('.')[0],
         self = this;
     console.log(subdomain,path);
-    if(subdomain != 'localhost')
+    if(subdomain != 'localhost' || subdomain != 'poke-alpha')
       path = '/'+subdomain+path;
     if(request.method == 'POST'){
       var data = "";
