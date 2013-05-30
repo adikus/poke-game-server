@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Pokemon Game Test Game server</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>Pokemon Game Alpha Game server</h1>
+      <form id="reg_form" method="post">
+        <h2>Registration</h2>
+        <span id="reg_error"><%=error%></span><br>
+        <input type="text" name="name" id="reg_name" placeholder="Username" value="<%=name%>"><br>
+        <input type="password" name="pass" id="reg_pass" placeholder="Password"><br>
+        <input type="password" name="pass-confirm" id="reg_pass_confirm" placeholder="Password"><br>
+        <input type="text" name="email" id="reg_email" placeholder="Email" value="<%=email%>"><br>
+        <button id="reg_start">Register</button>
+      </form>
+      <div id="push"></div>
+    </div>
+    <div id="footer">
+      <div class="container">
+        Andrej Hoos | 2013
+      </div>    
+    </div>
+  </body>
+</html> 

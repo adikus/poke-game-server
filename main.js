@@ -4,7 +4,7 @@ var fs = require('fs'),
     DB = require("./database");
 
 function main(config) {
-  var wsServer = new WsServer(3002,3003),
+  var wsServer = new WsServer(80,3003),
       server = new Server(wsServer);
 
   wsServer.onConnect(function(connection) {

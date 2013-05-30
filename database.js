@@ -10,6 +10,7 @@ var connection = mongoose.createConnection(process.env.POKE_GAME_DB || "mongodb:
 var playerSchema = mongoose.Schema({
   n: 'string',
   p: 'string',
+  e: 'string',
   s: 'mixed'
 });
 

@@ -3,8 +3,9 @@ var cls = require("./lib/class"),
     WebSocketServer = require('websocket').server,
     http = require('http'),
     https = require('https'),
-    Static = require('./static'),
-    fs = require('fs');
+    WWW = require('./www'),
+    fs = require('fs'),
+    querystring = require('querystring');
 
 var Connection = cls.Class.extend({
   init: function(id, connection, server) {
@@ -100,17 +101,29 @@ module.exports = WsServer = cls.Class.extend({
 
   processRequest: function(request, response) {
     console.log('Received request for ' + request.url);
-    var path_parts = request.url.split('/'),
-        path = path_parts[1],
-        file = path_parts.slice(2).join('/');
-    if(path == "register"){
-      if(!file || file == "")file = 'register.html';
-      new Static(file,function(data){
-        response.end(data);
+    var path = request.url,
+        subdomain = request.headers.host.split('.')[0],
+        self = this;
+    console.log(subdomain,path);
+    if(subdomain != 'localhost')
+      path = '/'+subdomain+path;
+    if(request.method == 'POST'){
+      var data = "";
+      request.on('data', function(chunk) {
+        data += chunk.toString();
+      });
+      request.on('end', function(chunk) {
+        if(chunk)data += chunk.toString();
+        self.register_callback(querystring.parse(data),function(path,responseData){
+          new WWW(path,function(data){
+            response.end(data);
+          },responseData);
+        });
       });
     }else{
-      response.writeHead(404);
-      response.end();  
+      new WWW(path,function(data){
+        response.end(data);
+      });
     }
   },
 
@@ -130,6 +143,10 @@ module.exports = WsServer = cls.Class.extend({
   
   onConnect: function(callback) {
     this.connection_callback = callback;
+  },
+
+  onRegister: function(callback) {
+    this.register_callback = callback;
   },
   
   onError: function(callback) {

@@ -6,5 +6,6 @@
     "underscore": ">0"
     , "websocket": ">0"
     , "mongoose": ">0"
+    , "validator": ">0"
   }
 }
